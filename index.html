@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Scheduler — New Booking</title>
+
+  <!-- Tailwind (CDN build) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="min-h-screen">
+
+  <!-- Nav — uses the same max-width/padding as table.html so the header
+       lines up identically between the two pages. -->
+  <nav class="border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-10">
+    <div class="app-container flex items-center justify-between py-4">
+      <div class="flex items-center gap-3">
+        <div class="brand-mark">BS</div>
+        <div>
+          <p class="font-semibold text-slate-900 leading-tight">Booking Scheduler</p>
+          <p class="text-xs text-slate-500">New booking entry</p>
+        </div>
+      </div>
+      <a href="table.html" class="btn-secondary">
+        View Table
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main — same outer container as table.html; the form itself is
+       constrained to a narrower inner column so it stays easy to read. -->
+  <main class="app-container py-10">
+    <div class="max-w-2xl mx-auto">
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold text-slate-900">New Booking</h1>
+        <p class="text-slate-500 text-sm mt-1">Fill in the details below to add a new booking to the schedule.</p>
+      </div>
+
+      <form id="booking-form" class="card p-6 sm:p-8 space-y-5">
+
+        <div>
+          <label for="name" class="field-label">Name</label>
+          <input type="text" id="name" name="name" class="field-input" placeholder="e.g. Juan Dela Cruz" required />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label for="date" class="field-label">Date of Booking</label>
+            <input type="date" id="date" name="date" class="field-input" required />
+          </div>
+          <div>
+            <label class="field-label">Time</label>
+            <div class="time-select-group">
+              <select id="time-hour" class="field-input time-select" required>
+                <option value="" disabled selected>HH</option>
+              </select>
+              <span class="time-colon">:</span>
+              <select id="time-minute" class="field-input time-select" required>
+                <option value="" disabled selected>MM</option>
+              </select>
+              <select id="time-period" class="field-input time-select-period" required>
+                <option value="" disabled selected>--</option>
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="remark" class="field-label">Remark</label>
+          <textarea id="remark" name="remark" class="field-input" placeholder="Any notes about this booking..."></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label for="payment" class="field-label">Payment</label>
+            <input type="text" id="payment" name="payment" class="field-input" placeholder="e.g. 1500 or Paid / Unpaid" />
+          </div>
+          <div>
+            <label for="status" class="field-label">Status</label>
+            <select id="status" name="status" class="field-input">
+              <option value="Pending">Pending</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-3">
+          <button type="reset" class="btn-secondary">Clear</button>
+          <button type="submit" id="submit-btn" class="btn-primary">
+            Save Booking
+          </button>
+        </div>
+      </form>
+
+      <p class="text-xs text-slate-400 mt-4 text-center">
+        Entries are saved directly to your connected Google Sheet.
+      </p>
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="form.js"></script>
+</body>
+</html>

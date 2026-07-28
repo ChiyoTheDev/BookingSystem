@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Scheduler — Bookings Table</title>
+
+  <!-- Tailwind (CDN build) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- PDF export libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body class="min-h-screen">
+
+  <!-- Nav — same max-width/padding as index.html so the header lines up
+       identically between the two pages. -->
+  <nav class="border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-10 no-print">
+    <div class="app-container flex items-center justify-between py-4">
+      <div class="flex items-center gap-3">
+        <div class="brand-mark">BS</div>
+        <div>
+          <p class="font-semibold text-slate-900 leading-tight">Booking Scheduler</p>
+          <p class="text-xs text-slate-500">All bookings</p>
+        </div>
+      </div>
+      <a href="index.html" class="btn-primary">
+        + New Booking
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <main class="app-container py-10">
+
+    <div class="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900">Bookings</h1>
+        <p class="text-slate-500 text-sm mt-1" id="result-count">Loading...</p>
+      </div>
+
+      <div class="flex items-center gap-2 no-print">
+        <span id="sync-indicator" class="sync-indicator hidden">
+          <div class="spinner"></div> Syncing...
+        </span>
+        <button id="refresh-btn" class="btn-secondary" title="Refresh">
+          Refresh
+        </button>
+        <button id="export-pdf-btn" class="btn-primary">
+          Export PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter tabs + search -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5 no-print">
+      <div class="flex flex-wrap items-center gap-2">
+        <button class="filter-tab active" data-filter="day">Today</button>
+        <button class="filter-tab" data-filter="week">This Week</button>
+        <button class="filter-tab" data-filter="month">This Month</button>
+        <button class="filter-tab" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="completed">Completed</button>
+      </div>
+
+      <div class="relative w-full sm:w-72">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="text"
+          id="search-input"
+          class="field-input search-input"
+          placeholder="Search name, date, remark, payment, status..."
+        />
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap card">
+      <table class="bookings-table">
+        <colgroup>
+          <col style="width: 16%">
+          <col style="width: 12%">
+          <col style="width: 11%">
+          <col style="width: 26%">
+          <col style="width: 12%">
+          <col style="width: 12%">
+          <col style="width: 11%" class="no-print">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Remark</th>
+            <th>Payment</th>
+            <th>Status</th>
+            <th class="no-print">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+
+      <div id="loading-state" class="empty-state hidden">
+        <div class="spinner mx-auto mb-3"></div>
+        <p>Loading bookings...</p>
+      </div>
+
+      <div id="empty-state" class="empty-state hidden">
+        <p>No bookings found.</p>
+      </div>
+
+      <!-- Pagination -->
+      <div id="pagination" class="pagination-bar no-print hidden"></div>
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="table.js"></script>
+</body>
+</html>
