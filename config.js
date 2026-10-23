@@ -9,5 +9,5 @@
 
 const CONFIG = {
   // Example: "https://script.google.com/macros/s/AKfycb.../exec"
-  WEB_APP_URL: "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE",
+  WEB_APP_URL: "AKfycbxJQFAIbFKpugSzKQKxfcSobQX7VQaiRLdiBwz1tqiI4Wq1dD7PnfR-m0LVd2mzh0KU",
 };
