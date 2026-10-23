@@ -9,5 +9,5 @@
 
 const CONFIG = {
   // Example: "https://script.google.com/macros/s/AKfycb.../exec"
-  WEB_APP_URL: "AKfycbxJQFAIbFKpugSzKQKxfcSobQX7VQaiRLdiBwz1tqiI4Wq1dD7PnfR-m0LVd2mzh0KU",
+  WEB_APP_URL: "https://script.google.com/macros/s/AKfycbxJQFAIbFKpugSzKQKxfcSobQX7VQaiRLdiBwz1tqiI4Wq1dD7PnfR-m0LVd2mzh0KU/exec",
 };
